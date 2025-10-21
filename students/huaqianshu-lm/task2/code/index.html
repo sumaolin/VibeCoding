@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>花千树 · 前端开发者个人站</title>
+    <meta
+      name="description"
+      content="花千树的个人介绍站点：前端程序员，专注 Vue 与 Node.js，正在探索 Vibe Coding 与 Web3，热爱阅读、书法与天马行空的创意。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-frame">
+      <nav class="nav">
+        <a class="brand" href="#top" aria-label="返回顶部">花千树</a>
+        <button class="menu-toggle" aria-label="打开导航菜单">
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-links">
+          <a href="#about">关于</a>
+          <a href="#skills">技能</a>
+          <a href="#learning">学习</a>
+          <a href="#hobbies">爱好</a>
+          <a href="#contact">联系</a>
+        </div>
+      </nav>
+
+      <header class="hero" id="top">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-content">
+          <p class="eyebrow" data-animate="fade-up">你好，我是</p>
+          <h1 class="hero-title" data-animate="fade-up">花千树 Huaqianshu</h1>
+          <p class="hero-tagline" data-animate="fade-up">
+            前端程序员，热爱创造沉浸式体验。专注于 <strong>Vue</strong> 与
+            <strong>Node.js</strong>，正在学习 <strong>Vibe Coding</strong> 与
+            <strong>Web3</strong>，用代码把天马行空的想象落地。
+          </p>
+          <div class="hero-actions" data-animate="fade-up">
+            <a class="primary" href="#projects">探索作品</a>
+            <a class="ghost" href="#contact">联系合作</a>
+          </div>
+          <div class="scroll-indicator" data-animate="fade-up">
+            <span>Scroll</span>
+            <div class="mouse">
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="pane about" id="about" data-animate="fade-in">
+          <div class="pinned">
+            <span class="section-title">关于我</span>
+            <h2>把交互体验当作一场充满诗意的旅程</h2>
+            <p>
+              我喜欢用前端技术构建沉浸式的数字体验：既要交互丝滑，也要有足够的温度。Vue 与
+              Node.js 是我最熟悉的工具，也常常使用 TypeScript、TailwindCSS
+              等现代工程化方案保障交付质量。
+            </p>
+            <p>
+              当我不在写代码时，我会潜入书海、挥洒书法，或是在脑海中策划下一次天马行空的创意冒险。
+            </p>
+          </div>
+          <ul class="highlights">
+            <li data-tilt>
+              <h3>体验为先</h3>
+              <p>通过细腻的动画与反馈，让界面在细节中自解释。</p>
+            </li>
+            <li data-tilt>
+              <h3>全栈视角</h3>
+              <p>熟悉 Node.js 生态，能在前后端协作中快速推进交付。</p>
+            </li>
+            <li data-tilt>
+              <h3>创意驱动</h3>
+              <p>灵感来自跨学科的阅读、书法与幻想，为产品注入灵魂。</p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="pane skills" id="skills" data-animate="fade-in">
+          <span class="section-title">技能树</span>
+          <h2>用 Vue 与 Node.js 打造端到端体验</h2>
+          <div class="skills-grid">
+            <article class="skill-card" data-tilt>
+              <h3>核心栈</h3>
+              <ul>
+                <li>Vue 3 · Nuxt · Vite</li>
+                <li>Node.js · Express · NestJS</li>
+                <li>TypeScript · Pinia · VueUse</li>
+              </ul>
+            </article>
+            <article class="skill-card" data-tilt>
+              <h3>体验工程</h3>
+              <ul>
+                <li>微交互与动效设计</li>
+                <li>设计系统与组件化</li>
+                <li>性能优化与可访问性</li>
+              </ul>
+            </article>
+            <article class="skill-card" data-tilt>
+              <h3>协作与工具</h3>
+              <ul>
+                <li>Git · GitHub Actions</li>
+                <li>Jest · Vitest · Cypress</li>
+                <li>Vercel · Docker · CI/CD</li>
+              </ul>
+            </article>
+            <article class="skill-card" data-tilt>
+              <h3>创作延展</h3>
+              <ul>
+                <li>Creative Coding · Canvas</li>
+                <li>数字书法与字体设计</li>
+                <li>沉浸式叙事体验</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="pane learning" id="learning" data-animate="fade-in">
+          <div class="orbit">
+            <div class="orbit-core">
+              <span>持续学习</span>
+            </div>
+            <div class="orbit-track track-1">
+              <span>Vibe Coding</span>
+            </div>
+            <div class="orbit-track track-2">
+              <span>Web3 架构</span>
+            </div>
+            <div class="orbit-track track-3">
+              <span>去中心化设计</span>
+            </div>
+          </div>
+          <div class="learning-copy">
+            <span class="section-title">探索中</span>
+            <h2>把下一代体验落地到现实中</h2>
+            <p>
+              我正系统学习 Vibe Coding 与 Web3：前者关注情感化与沉浸式的产品体验，后者则重新定义数据与价值的流动方式。
+              我喜欢在概念与代码之间快速迭代，用实验驱动灵感。
+            </p>
+            <div class="timeline">
+              <div class="timeline-item">
+                <span class="time">2025 · Q1</span>
+                <p>调研 Vibe Coding 案例，复刻交互细节并沉淀成可复用工具集。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="time">2025 · Q2</span>
+                <p>构建 Web3 DApp 原型，探索钱包交互与链上数据可视化。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="time">2025 · Q3</span>
+                <p>将创意编码与书法结合，尝试沉浸式数字艺术作品。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="pane projects" id="projects" data-animate="fade-in">
+          <span class="section-title">作品速览</span>
+          <h2>创造让人记住的体验</h2>
+          <div class="project-grid">
+            <article class="project-card" data-tilt>
+              <h3>Immersive Dashboard</h3>
+              <p>基于 Vue 3 与 Three.js 的动态数据面板，结合实时数据与沉浸式视觉。</p>
+              <span class="tag">交互实验</span>
+            </article>
+            <article class="project-card" data-tilt>
+              <h3>书法氛围站</h3>
+              <p>把书法笔触与 WebGL 粒子结合，打造可交互的艺术展示。</p>
+              <span class="tag">创意编码</span>
+            </article>
+            <article class="project-card" data-tilt>
+              <h3>Web3 Narrative</h3>
+              <p>围绕去中心化身份打造叙事体验原型，用故事解释复杂概念。</p>
+              <span class="tag">概念验证</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="pane hobbies" id="hobbies" data-animate="fade-in">
+          <span class="section-title">灵感库</span>
+          <h2>读书、书法与天马行空，都是我的灵感来源</h2>
+          <div class="hobby-cloud">
+            <button type="button" class="hobby-pill" data-tilt>现代诗歌</button>
+            <button type="button" class="hobby-pill" data-tilt>新派书法</button>
+            <button type="button" class="hobby-pill" data-tilt>哲学随笔</button>
+            <button type="button" class="hobby-pill" data-tilt>赛博朋克</button>
+            <button type="button" class="hobby-pill" data-tilt>叙事设计</button>
+            <button type="button" class="hobby-pill" data-tilt>城市漫游</button>
+            <button type="button" class="hobby-pill" data-tilt>想象力训练</button>
+            <button type="button" class="hobby-pill" data-tilt>创意工作坊</button>
+          </div>
+          <div class="quote-card" data-tilt>
+            <p>
+              “灵感像溪流，总在阅读的间隙、书法的笔锋与遐想的缝隙中，闪烁着未知的光。”
+            </p>
+          </div>
+        </section>
+
+        <section class="pane contact" id="contact" data-animate="fade-in">
+          <div class="contact-card" data-tilt>
+            <span class="section-title">联系我</span>
+            <h2>一起打造下一段沉浸式体验</h2>
+            <p>
+              无论是产品合作、创意实验还是技术交流，都欢迎来聊。可以通过邮件或社交平台找到我。
+            </p>
+            <div class="contact-actions">
+              <a class="primary" href="mailto:hi@huaqianshu.dev">hi@huaqianshu.dev</a>
+              <a class="ghost" href="https://huaqianshu-lm.github.io/" target="_blank" rel="noopener">
+                博客
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>© 2025 花千树 · Crafted with curiosity & code.</p>
+      </footer>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
