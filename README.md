@@ -95,7 +95,7 @@
 - 主题： 从 AIVerse 觅见 0G
 - 讲师： [Wei](https://x.com/0G_labs) -  0G 币圈原型码写工程师
 
-### Lesson 6 · 10月24日（周四）
+### Lesson 6 · 10月24日（周五）
 
 - 主题： Vibe Coding 独立站如何付费转化
 - 讲师： [Cell细胞](https://x.com/cellinlab) -  超级个体社区物种库发起人，小火炉播客创始人
@@ -143,5 +143,5 @@
 | 0G       |  茶具礼盒            |   5份    |
 | Nora     |  Credits Sponsorship |   300份  |
 | Nora     |  不锈钢开瓶器, 卫衣, 泡泡玛特品牌玩偶 |   数份  |
-| SpoonOS  |   OpenRouter 的 API Key(价值100U) |   5份  |
+| SpoonOS  |  OpenRouter 的 API Key(价值100U) |   5份  |
 
