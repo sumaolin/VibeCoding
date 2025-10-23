@@ -1,0 +1,15 @@
+body { background: #f7f7f7; }
+.container { background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+h1 { margin-top: 0; }
+.toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+input, select, button, textarea { padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+button { cursor: pointer; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border-bottom: 1px solid #eee; padding: 8px; text-align: left; }
+.status { text-transform: capitalize; }
+.actions { display: flex; gap: 8px; }
+.error { color: #c00; margin: 8px 0; }
+.empty { color: #666; padding: 16px; text-align: center; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.modal .card { background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); min-width: 320px; max-width: 480px; width: calc(100% - 32px); }
+.modal button[disabled], .modal input[disabled], .modal select[disabled], .modal textarea[disabled] { opacity: 0.7; cursor: not-allowed; }
