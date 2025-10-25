@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todolist - Vue (CDN)</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 24px; background: #f7f7f7; }
+    .container { max-width: 960px; margin: 0 auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    h1 { margin-top: 0; }
+    .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    input, select, button, textarea { padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+    button { cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid #eee; padding: 8px; text-align: left; }
+    .status { text-transform: capitalize; }
+    .actions { display: flex; gap: 8px; }
+    .error { color: #c00; margin: 8px 0; }
+    .empty { color: #666; padding: 16px; text-align: center; }
+    .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.35); }
+    .modal.show { display: flex; }
+    .modal .card { background: #fff; padding: 16px; border-radius: 8px; width: 520px; max-width: 90vw; }
+    .card h3 { margin: 8px 0 12px; }
+  </style>
+</head>
+<body>
+  <div id="app" class="container">
+    <h1>待办事项</h1>
+
+    <div class="toolbar">
+      <input v-model.trim="filters.q" placeholder="搜索标题或描述" @keyup.enter="fetchTodos" />
+      <select v-model="filters.status">
+        <option value="">全部状态</option>
+        <option value="todo">待办</option>
+        <option value="in_progress">进行中</option>
+        <option value="done">已完成</option>
+      </select>
+      <select v-model="filters.priority">
+        <option value="">全部优先级</option>
+        <option value="low">低</option>
+        <option value="medium">中</option>
+        <option value="high">高</option>
+      </select>
+      <select v-model="sortBy">
+        <option value="createdAt">创建时间</option>
+        <option value="updatedAt">更新时间</option>
+        <option value="dueDate">截止日期</option>
+        <option value="priority">优先级</option>
+      </select>
+      <select v-model="sortOrder">
+        <option value="desc">降序</option>
+        <option value="asc">升序</option>
+      </select>
+      <button @click="fetchTodos">查询</button>
+      <button @click="openCreate">新建任务</button>
+    </div>
+
+    <div class="error" v-if="error">{{ error }}</div>
+
+    <table v-if="items.length">
+      <thead>
+        <tr>
+          <th>标题</th>
+          <th>描述</th>
+          <th>状态</th>
+          <th>优先级</th>
+          <th>截止日期</th>
+          <th>创建/更新</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="t in items" :key="t.id">
+          <td>{{ t.title }}</td>
+          <td>{{ t.description || '-' }}</td>
+          <td class="status">{{ t.status }}</td>
+          <td>{{ t.priority }}</td>
+          <td>{{ t.dueDate || '-' }}</td>
+          <td>
+            <small>c: {{ t.createdAt }}</small><br />
+            <small>u: {{ t.updatedAt }}</small>
+          </td>
+          <td class="actions">
+            <button @click="openEdit(t)">编辑</button>
+            <button @click="toggleStatus(t)">{{ t.status === 'done' ? '设为待办' : '设为完成' }}</button>
+            <button @click="confirmDelete(t)">删除</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="empty" v-else>暂无数据</div>
+
+    <div class="toolbar" style="justify-content: flex-end;">
+      <button :disabled="page<=1" @click="page--; fetchTodos()">上一页</button>
+      <span style="padding:8px;">第 {{ page }} 页</span>
+      <button :disabled="items.length < pageSize" @click="page++; fetchTodos()">下一页</button>
+      <select v-model.number="pageSize" @change="page=1; fetchTodos()">
+        <option :value="10">10</option>
+        <option :value="20">20</option>
+        <option :value="50">50</option>
+      </select>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" :class="{ show: showModal }" @click.self="closeModal">
+      <div class="card">
+        <h3>{{ isEdit ? '编辑任务' : '新建任务' }}</h3>
+        <div class="error" v-if="modalError">{{ modalError }}</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <input v-model.trim="form.title" placeholder="标题（必填≤100）" />
+          <textarea v-model.trim="form.description" placeholder="描述（≤1000）"></textarea>
+          <select v-model="form.status">
+            <option value="todo">待办</option>
+            <option value="in_progress">进行中</option>
+            <option value="done">已完成</option>
+          </select>
+          <select v-model="form.priority">
+            <option value="low">低</option>
+            <option value="medium">中</option>
+            <option value="high">高</option>
+          </select>
+          <input v-model.trim="form.dueDate" placeholder="截止日期（ISO8601，如 2025-12-31T23:59:59Z）" />
+        </div>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <button @click="submitForm">{{ isEdit ? '保存' : '创建' }}</button>
+          <button @click="closeModal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    const { createApp, reactive } = Vue;
+
+    createApp({
+      data() {
+        return {
+          items: [],
+          error: '',
+          page: 1,
+          pageSize: 20,
+          sortBy: 'createdAt',
+          sortOrder: 'desc',
+          filters: reactive({ status: '', priority: '', q: '' }),
+          showModal: false,
+          isEdit: false,
+          current: null,
+          modalError: '',
+          form: reactive({ title: '', description: '', status: 'todo', priority: 'medium', dueDate: '' }),
+          baseURL: '/api',
+        };
+      },
+      mounted() {
+        this.fetchTodos();
+      },
+      methods: {
+        async fetchTodos() {
+          this.error = '';
+          const params = new URLSearchParams({
+            page: String(this.page),
+            pageSize: String(this.pageSize),
+            sortBy: this.sortBy,
+            sortOrder: this.sortOrder,
+          });
+          if (this.filters.status) params.set('status', this.filters.status);
+          if (this.filters.priority) params.set('priority', this.filters.priority);
+          if (this.filters.q) params.set('q', this.filters.q);
+          try {
+            const res = await fetch(`${this.baseURL}/todos?` + params.toString());
+            if (!res.ok) throw new Error('加载失败');
+            this.items = await res.json();
+          } catch (e) {
+            this.error = e.message || '请求失败';
+          }
+        },
+        openCreate() {
+          this.isEdit = false;
+          this.current = null;
+          Object.assign(this.form, { title: '', description: '', status: 'todo', priority: 'medium', dueDate: '' });
+          this.modalError = '';
+          this.showModal = true;
+        },
+        openEdit(t) {
+          this.isEdit = true;
+          this.current = t;
+          Object.assign(this.form, { title: t.title, description: t.description || '', status: t.status, priority: t.priority, dueDate: t.dueDate || '' });
+          this.modalError = '';
+          this.showModal = true;
+        },
+        closeModal() {
+          this.showModal = false;
+        },
+        async submitForm() {
+          // simple client-side validation
+          if (!this.form.title || this.form.title.length > 100) {
+            this.modalError = '标题必填且不超过100字符';
+            return;
+          }
+          if (this.form.description && this.form.description.length > 1000) {
+            this.modalError = '描述不超过1000字符';
+            return;
+          }
+          if (!['todo','in_progress','done'].includes(this.form.status)) {
+            this.modalError = '状态不合法';
+            return;
+          }
+          if (!['low','medium','high'].includes(this.form.priority)) {
+            this.modalError = '优先级不合法';
+            return;
+          }
+
+          try {
+            if (this.isEdit && this.current) {
+              const res = await fetch(`${this.baseURL}/todos/${this.current.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  title: this.form.title,
+                  description: this.form.description || null,
+                  status: this.form.status,
+                  dueDate: this.form.dueDate || null,
+                  priority: this.form.priority,
+                }),
+              });
+              if (!res.ok) throw new Error('更新失败');
+            } else {
+              const res = await fetch(`${this.baseURL}/todos`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  title: this.form.title,
+                  description: this.form.description || null,
+                  status: this.form.status,
+                  dueDate: this.form.dueDate || null,
+                  priority: this.form.priority,
+                }),
+              });
+              if (!res.ok) throw new Error('创建失败');
+            }
+            this.showModal = false;
+            await this.fetchTodos();
+          } catch (e) {
+            this.modalError = e.message || '请求失败';
+          }
+        },
+        async toggleStatus(t) {
+          const next = t.status === 'done' ? 'todo' : 'done';
+          try {
+            const res = await fetch(`${this.baseURL}/todos/${t.id}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ status: next }),
+            });
+            if (!res.ok) throw new Error('更新失败');
+            await this.fetchTodos();
+          } catch (e) {
+            this.error = e.message || '操作失败';
+          }
+        },
+        async confirmDelete(t) {
+          if (!confirm(`确认删除任务: ${t.title}?`)) return;
+          try {
+            const res = await fetch(`${this.baseURL}/todos/${t.id}`, { method: 'DELETE' });
+            if (res.status !== 204) throw new Error('删除失败');
+            await this.fetchTodos();
+          } catch (e) {
+            this.error = e.message || '删除失败';
+          }
+        },
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
