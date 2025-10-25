@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大大黄 - 个人介绍</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Background Animation -->
+        <div class="bg-animation">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-text">大大黄</span>
+                <div class="logo-glow"></div>
+            </div>
+            <nav class="nav">
+                <a href="#about" class="nav-link">关于我</a>
+                <a href="#skills" class="nav-link">技能</a>
+                <a href="#contact" class="nav-link">联系方式</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">你好，我是</span>
+                    <span class="title-main">大大黄</span>
+                    <span class="title-subtitle">Fullstack Developer</span>
+                </h1>
+                <p class="hero-description">
+                    五六年老码农，熟悉前端生态，正在探索Web3的无限可能
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('about')">了解更多</button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('contact')">联系我</button>
+                </div>
+            </div>
+            <div class="hero-avatar">
+                <div class="avatar-container">
+                    <div class="avatar-glow"></div>
+                    <div class="avatar-ring"></div>
+                    <div class="avatar-inner">
+                        <span class="avatar-text">DH</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about">
+            <div class="section-header">
+                <h2 class="section-title">关于我</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-card">
+                    <div class="card-icon">👨‍💻</div>
+                    <h3>经验丰富</h3>
+                    <p>五六年编程经验，深耕前端技术栈</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon">🚀</div>
+                    <h3>持续学习</h3>
+                    <p>正在学习Web3技术，探索区块链开发</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon">🤖</div>
+                    <h3>AI赋能</h3>
+                    <p>希望掌握AI工具，提高编程效率</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section skills">
+            <div class="section-header">
+                <h2 class="section-title">技术栈</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-item" data-skill="React">
+                    <div class="skill-icon">⚛️</div>
+                    <div class="skill-name">React</div>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="90"></div>
+                    </div>
+                </div>
+                <div class="skill-item" data-skill="Solidity">
+                    <div class="skill-icon">💎</div>
+                    <div class="skill-name">Solidity</div>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="75"></div>
+                    </div>
+                </div>
+                <div class="skill-item" data-skill="JavaScript">
+                    <div class="skill-icon">🟨</div>
+                    <div class="skill-name">JavaScript</div>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="95"></div>
+                    </div>
+                </div>
+                <div class="skill-item" data-skill="Web3">
+                    <div class="skill-icon">🌐</div>
+                    <div class="skill-name">Web3</div>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="70"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact">
+            <div class="section-header">
+                <h2 class="section-title">联系我</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-info">
+                        <div class="contact-label">邮箱</div>
+                        <div class="contact-value">wyj779503577@gmail.com</div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🐙</div>
+                    <div class="contact-info">
+                        <div class="contact-label">GitHub</div>
+                        <div class="contact-value">dajiangjunok</div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📚</div>
+                    <div class="contact-info">
+                        <div class="contact-label">课程</div>
+                        <div class="contact-value">Vibe Coding 实战课</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 大大黄. 用❤️和代码构建未来</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
